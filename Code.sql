@@ -108,24 +108,45 @@ INSERT INTO Client (ClientID, Surname, GivenName, Gender) values (102571951, 'Ab
 
 Create Table Booking (
 CYMDID NVARCHAR(300) Primary Key
-, DateBooked DATE
+, DateBooked NVARCHAR(100)
 , Payment MONEY
 , TYMDID NVARCHAR(200) Foreign Key (TYMDID) references Events
 , ClientID INT Foreign Key (ClientID) references Client
 );
 
-INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('1NJ916', 10/12/2015, 200, 'NJ916', 1)
-INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('2NJ916', 16/12/2015, 200, 'NJ916', 2)
-INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('1NF1316', 8/01/2016, 225, 'NF1316', 1)
-INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('2NF1316', 14/01/2016, 125, 'NF1316', 2)
-INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('3NF1316', 3/02/2016, 225, 'NF1316', 3)
-INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('1SJ916', 10/12/2015, 200, 'SJ916', 1)
-INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('2SJ1616', 18/12/2015, 200, 'SJ1616', 2)
-INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('3SJ1616', 9/01/2016, 200, 'SJ1616', 3)
-INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('2WJ2916', 17/12/2015, 225, 'WJ2916', 2)
-INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('3WJ2916', 18/12/2015, 225, 'WJ2916', 3)
-INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('10WJ2916', 10/12/2015, 225, 'WJ2916', 102571951)
-INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('10SJ1616', 18/12/2015, 200, 'SJ1616', 102571951)
-INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('10NJ916', 16/12/2015, 200, 'NJ916', 102571951)
+INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('1NJ916', '10/12/2015', 200, 'NJ916', 1)
+INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('2NJ916', '16/12/2015', 200, 'NJ916', 2)
+INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('1NF1316', '8/01/2016', 225, 'NF1316', 1)
+INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('2NF1316', '14/01/2016', 125, 'NF1316', 2)
+INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('3NF1316', '3/02/2016', 225, 'NF1316', 3)
+INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('1SJ916', '10/12/2015', 200, 'SJ916', 1)
+INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('2SJ1616', '18/12/2015', 200, 'SJ1616', 2)
+INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('3SJ1616', '9/01/2016', 200, 'SJ1616', 3)
+INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('2WJ2916', '17/12/2015', 225, 'WJ2916', 2)
+INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('3WJ2916', '18/12/2015', 225, 'WJ2916', 3)
+INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('10WJ2916', '10/12/2015', 225, 'WJ2916', 102571951)
+INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('10SJ1616', '18/12/2015', 200, 'SJ1616', 102571951)
+INSERT INTO Booking (CYMDID, DateBooked, Payment, TYMDID, ClientID) values ('10NJ916', '16/12/2015', 200, 'NJ916', 102571951)
 
 --Task 3 completed
+
+--Task 4 
+
+--Query 1: works but doesn't show any data 
+SELECT C.GivenName, C.Surname, T.TourName, T.Descriptions, E.EventYear, E.EventMonth, E.EventDay, E.Fee, B.DateBooked, B.Payment
+From Client C
+INNER JOIN Tour T
+on C.ClientID = T.TourName
+INNER JOIN  Events E
+on T.TourName = E.TYMDID
+INNER JOIN Booking B
+on E.TYMDID = B.CYMDID
+
+--Query 2 
+SELECT T.TourName, E.EventMonth, count()
+FROM Tour T
+INNER JOIN Events E
+on T.TourName = E.TourName
+
+
+
